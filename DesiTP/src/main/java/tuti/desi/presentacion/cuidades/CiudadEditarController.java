@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,12 @@ public class CiudadEditarController {
 	@Autowired
     private ProvinciaService servicioProvincia;
      
+	@GetMapping("welcome")
+	public String welcome() {
+		return "welcome";
+	}
+	
+	
     @RequestMapping(path = {"", "/{id}"},method=RequestMethod.GET)
     public String preparaForm(Model modelo, @PathVariable("id") Optional<Long> dni) throws Exception {
     	if (dni.isPresent()) {
