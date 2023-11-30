@@ -34,6 +34,7 @@ public class CiudadesBuscarController {
     @RequestMapping(method=RequestMethod.GET)
     public String preparaForm(Model modelo) {
     	CiudadesBuscarForm form =  new CiudadesBuscarForm();
+    	
 //    	 form.setProvincias(servicioProvincia.getAll());    //  en lugar de esto hacemos @ModelAttribute("allProvincias")
        modelo.addAttribute("formBean",form);
        return "ciudadesBuscar";
