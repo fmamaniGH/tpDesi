@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title><span th:text="#{vuelo.buscar.titulo}"></span></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+
+<body>
+		<div class="starter-template">
+	        <h1><span  th:text="#{empresa}" /></h1>
+	        <h2>
+	            <span th:text="#{vuelo.buscar.titulo}"></span>
+	        </h2>
+	    </div>
+	    
+	    
+		<div style="text-align: center;">
+			<form  th:action="@{/vueloBuscar}" th:object="${formBean}" method="post">
+
+					<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+					<table border="1" style="align-self: center;">
+						
+				        <tr>
+				            <td><label th:text="#{vuelo.codigo}" /></td>
+				            <td><input type="text" th:field="*{codigo}" /></td>            
+				        </tr>       
+				        <!--
+				         <tr>
+				            <td><label th:text="#{ciudad.provincia}" /></td>
+				            <td>
+						        <select th:field="*{provinciaSeleccionada}">
+								  <option th:value="null" text="Seleccione una opción"></option>
+								  <option th:each="p : ${allProvincias}" 
+								          th:value="${p.id}" 
+								          th:text="${p.nombre}"></option>
+								</select>
+							</td>
+						</tr>
+						-->
+				  	</table>
+				  
+				  	<table class="botones">
+				
+				      <tr>
+					      <td><input type="submit" name="action" value="Buscar" /></td>
+					      <!--<td><input type="submit" name="action" value="Cancelar" /></td>
+					       <td><input type="submit" name="action" value="Registrar" /></td>-->
+				      </tr>	        
+				    </table>
+				    
+				    
+				    <table  class="resultados" border="0" style="align-self: center;">
+					    <thead>
+					      <tr>
+					        <th ><label th:text="#{vuelo.codigo}" /></th>
+					        <th ><label th:text="#{vuelo.origen}" /></th>
+					        <th ><label th:text="#{vuelo.destino}" /></th>
+					        <th ><label th:text="#{vuelo.fechayHora}" /></th>
+					        <th ><label th:text="#{vuelo.tipoVuelo}" /></th>
+					        <th ><label th:text="#{vuelo.aeronave}" /></th>
+					        <th ></th>
+					        <th ></th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					      <tr th:each="p : ${resultados}">
+							    <td th:text="${{p.codigo}}"></td>
+						        <td th:text="${{p.ciudad.nombre}}" ></td>
+						        <td th:text="${{p.ciudad.nombre}}"></td>
+						        <td th:text="${{p.fechayHora}}" ></td>
+						        <td th:text="${{p.tipoVuelo}}"></td>
+						        <td th:text="${{p.Aeronave.modelo}}" ></td>
+						        <td>
+				                    <a th:href="@{/vueloEditar/{id}(id=${p.id})}" class="btn btn-primary">
+				                        editar
+				                    </a>
+				                </td>
+				                <td>
+				                    <a th:href="@{/vueloEditar/delete/{id}(id=${p.id})}" class="btn btn-primary">
+				                        eliminar
+				                    </a>
+				                </td>
+						        
+					      </tr>
+					    </tbody>
+				    </table>		
+	           
+			</form>
+		
+		</div>
+</body>
+
+</html>	

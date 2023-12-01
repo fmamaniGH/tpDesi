@@ -4,15 +4,23 @@
 	
    
 	
-  <div class="starter-template">
-        <h1>Ejemplo Spring Boot Web Thymeleaf </h1>
+  	<div class="starter-template" style="height:150px; text-align: center;">
+        <h1>Aerolineas Argentina</h1>
         <h2>
             <span th:text="'Bienvenido'"></span>
         </h2>
     </div>
-    <a th:href="personasBuscar">Personas</a>
-    <a th:href="ciudadesBuscar">Ciudades</a>
     
-        
+    <div style="text-align: center;">
+	    <a th:href="vueloBuscar">Programacion de vuelos</a>
+	    <br /><br />
+	    <a th:href="personasBuscar">Datos Impositivos</a>
+	    <br/><br />
+	    <a th:href="index">Listado de Vuelos</a>
+	    <!--
+	    <a th:href="personasBuscar">Personas</a>
+	    <a th:href="ciudadesBuscar">Ciudades</a>
+	    -->        
+    </div>
   </body>
 </html>
