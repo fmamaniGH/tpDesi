@@ -3,7 +3,7 @@ package tuti.desi.presentacion.vuelos;
 public class VueloBuscarForm {
 
 	private String codigo;
-	private Long IdCiudadSeleccionada;
+	//private Long IdCiudadSeleccionada;
 	
 
 	public String getCodigo() {
@@ -17,10 +17,10 @@ public class VueloBuscarForm {
 		this.codigo = codigo;
 	}
 	
-	public Long getIdCiudadSeleccionada() {
-		return IdCiudadSeleccionada;
-	}
-	public void setIdCiudadSeleccionada(Long idCiudadSeleccionada) {
-		IdCiudadSeleccionada = idCiudadSeleccionada;
-	}
+	//public Long getIdCiudadSeleccionada() {
+	//	return IdCiudadSeleccionada;
+	//}
+	//public void setIdCiudadSeleccionada(Long idCiudadSeleccionada) {
+	//	IdCiudadSeleccionada = idCiudadSeleccionada;
+	//}
 }

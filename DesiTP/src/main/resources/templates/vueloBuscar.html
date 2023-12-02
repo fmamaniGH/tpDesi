@@ -44,8 +44,8 @@
 				
 				      <tr>
 					      <td><input type="submit" name="action" value="Buscar" /></td>
-					      <!--<td><input type="submit" name="action" value="Cancelar" /></td>
-					       <td><input type="submit" name="action" value="Registrar" /></td>-->
+					      <td><input type="submit" name="action" value="Cancelar" /></td>
+					       <td><input type="submit" name="action" value="Registrar" /></td>
 				      </tr>	        
 				    </table>
 				    
@@ -59,6 +59,7 @@
 					        <th ><label th:text="#{vuelo.fechayHora}" /></th>
 					        <th ><label th:text="#{vuelo.tipoVuelo}" /></th>
 					        <th ><label th:text="#{vuelo.aeronave}" /></th>
+					        
 					        <th ></th>
 					        <th ></th>
 					      </tr>
@@ -66,10 +67,10 @@
 					    <tbody>
 					      <tr th:each="p : ${resultados}">
 							    <td th:text="${{p.codigo}}"></td>
-						        <td th:text="${{p.ciudad.nombre}}" ></td>
-						        <td th:text="${{p.ciudad.nombre}}"></td>
-						        <td th:text="${{p.fechayHora}}" ></td>
-						        <td th:text="${{p.tipoVuelo}}"></td>
+						        <td th:text="${{p.origen.nombre}}" ></td>
+						        <td th:text="${{p.destino.nombre}}"></td>
+						        <td th:text="${{p.fechaYHora}}" ></td>
+						        <td th:text="${{p.tipo_vuelo}}"></td>
 						        <td th:text="${{p.Aeronave.modelo}}" ></td>
 						        <td>
 				                    <a th:href="@{/vueloEditar/{id}(id=${p.id})}" class="btn btn-primary">

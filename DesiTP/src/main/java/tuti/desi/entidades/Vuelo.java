@@ -17,37 +17,36 @@ public class Vuelo {
 	private Long id;
 		
 	private String codigo;
-	//private String origen;
-
-	//private String destino;	
 
 	private Date fechaYHora;
 
-	private String tipoVuelo;	
+	private String tipo_vuelo;	
 
+	private Long precio;
+	
 	@OneToOne
 	private Aeronave aeronave;
 	
-	@ManyToOne
+	@OneToOne
 	private Ciudad origen;
 	
-	@ManyToOne
+	@OneToOne
 	private Ciudad destino;
 
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public Date getFechaYHora() {
 		return fechaYHora;
 	}
 
 	public void setFechaYHora(Date fechaYHora) {
 		this.fechaYHora = fechaYHora;
-	}
-
-	public String getTipoVuelo() {
-		return tipoVuelo;
-	}
-
-	public void setTipoVuelo(String tipoVuelo) {
-		this.tipoVuelo = tipoVuelo;
 	}
 	
 	public Ciudad getOrigen() {
@@ -63,6 +62,7 @@ public class Vuelo {
 	public void setDestino(Ciudad destino) {
 		this.destino = destino;
 	}
+	
 
 	public String getCodigo() {
 		return codigo;
@@ -71,5 +71,26 @@ public class Vuelo {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	
+
+	public Long getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Long precio) {
+		this.precio = precio;
+	}
+	public Aeronave getAeronave() {
+		return aeronave;
+	}
+	public void setAeronave(Aeronave aeronave) {
+		this.aeronave = aeronave;
+	}
+
+	public String getTipo_vuelo() {
+		return tipo_vuelo;
+	}
+
+	public void setTipo_vuelo(String tipo_vuelo) {
+		this.tipo_vuelo = tipo_vuelo;
+	}
 }
