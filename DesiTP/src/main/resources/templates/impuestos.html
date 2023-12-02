@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Impuestos</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+    <div class="starter-template">
+        <h1><span th:text="#{empresa}" /></h1>
+        <h2><span th:text="#{impuesto.editar.titulo}" /></h2>
+    </div>
+    
+    <form th:action="@{/guardarImpuestos}" th:object="${formBean}" method="post">
+        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+        <table border="1" style="align-self: center;">
+            <tr>
+                <td><label th:text="#{impuesto.porcentajeIva}" /></td>
+                <td><input type="number" step="0.01" th:field="*{porcentajeIva}" required></td>
+            </tr>
+            <tr>
+                <td><label th:text="#{impuesto.montoTasaNacional}" /></td>
+                <td><input type="number" step="0.01" th:field="*{montoTasaNacional}" required></td>
+            </tr>
+            <tr>
+                <td><label th:text="#{impuesto.montoTasaInternacional}" /></td>
+                <td><input type="number" step="0.01" th:field="*{montoTasaInternacional}" required></td>
+            </tr>
+            <tr>
+                <td><label th:text="#{impuesto.cotizacionDolar}" /></td>
+                <td><input type="number" step="0.01" th:field="*{cotizacionDolar}" required></td>
+            </tr>
+        </table>
+        <table class="botones">
+            <tr>
+                <td><input type="submit" value="Guardar" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
