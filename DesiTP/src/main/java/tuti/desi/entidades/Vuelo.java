@@ -24,13 +24,13 @@ public class Vuelo {
 
 	private Long precio;
 	
-	@OneToOne
+	@ManyToOne
 	private Aeronave aeronave;
 	
-	@OneToOne
+	@ManyToOne
 	private Ciudad origen;
 	
-	@OneToOne
+	@ManyToOne
 	private Ciudad destino;
 
 

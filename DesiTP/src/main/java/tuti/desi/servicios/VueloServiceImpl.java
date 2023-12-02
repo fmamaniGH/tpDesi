@@ -31,7 +31,7 @@ public class VueloServiceImpl implements VueloService {
 
 	@Override
 	public void deleteByid(Long id) {
-		// TODO Auto-generated method stub
+		repo.deleteById(id);
 		
 	}
 

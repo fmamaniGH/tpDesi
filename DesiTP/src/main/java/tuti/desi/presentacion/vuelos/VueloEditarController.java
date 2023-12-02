@@ -55,6 +55,15 @@ public class VueloEditarController {
 		}
        return "VueloEditar";
     }
+    
+	
+	@RequestMapping(path = "/delete/{id}", method = RequestMethod.GET)
+	public String deleteById(Model model, @PathVariable("id") Long id) 
+	{
+		servicioVuelo.deleteByid(id);
+		return "redirect:/";
+	}
+ 
      
     @ModelAttribute("allAeronaves")
     public List<Aeronave> getAllAeronaves() {
