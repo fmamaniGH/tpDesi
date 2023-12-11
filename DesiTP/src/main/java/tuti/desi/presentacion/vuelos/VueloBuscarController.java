@@ -59,8 +59,7 @@ public class VueloBuscarController {
    public String submit( @ModelAttribute("formBean")  @Valid  VueloBuscarForm formBean,BindingResult result, ModelMap modelo,@RequestParam String action) {
 
    	if(action.equals("Buscar"))
-   	{
-   		
+   	{   		
    		
    		try {
    			List<Vuelo> vuelos = serviceVuelo.filter(formBean);

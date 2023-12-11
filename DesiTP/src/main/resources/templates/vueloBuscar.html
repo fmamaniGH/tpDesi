@@ -19,11 +19,12 @@
 			<form  th:action="@{/vueloBuscar}" th:object="${formBean}" method="post">
 
 					<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
-					<table border="1" style="align-self: center;">
+					<table border="0" style="align-self: center;">
 						
 				        <tr>
 				            <td><label th:text="#{vuelo.codigo}" /></td>
-				            <td><input type="text" th:field="*{codigo}" /></td>            
+				            <td><input type="text" th:field="*{codigo}" /></td>     
+				            <td><label>*vacio busca todos los vuelos</label></td>       
 				        </tr>       
 				        <!--
 				         <tr>
@@ -54,12 +55,12 @@
 					    <thead>
 					      <tr>
 					        <th ><label th:text="#{vuelo.codigo}" /></th>
-					        <th ><label th:text="#{vuelo.origen}" /></th>
-					        <th ><label th:text="#{vuelo.destino}" /></th>
-					        <th ><label th:text="#{vuelo.fechayHora}" /></th>
+					        <th ><label th:text="#{vuelo.fechaYHora}" /></th>
+					        <th ><label th:text="#{vuelo.precio}" /></th>
 					        <th ><label th:text="#{vuelo.tipoVuelo}" /></th>
 					        <th ><label th:text="#{vuelo.aeronave}" /></th>
-					        
+					        <th ><label th:text="#{vuelo.origen}" /></th>
+					        <th ><label th:text="#{vuelo.destino}" /></th>
 					        <th ></th>
 					        <th ></th>
 					      </tr>
@@ -67,11 +68,12 @@
 					    <tbody>
 					      <tr th:each="p : ${resultados}">
 							    <td th:text="${{p.codigo}}"></td>
+							    <td th:text="${{p.fechaYHora}}" ></td>
+							    <td th:text="${{p.precio}}" ></td>
+							    <td th:text="${{p.tipo_vuelo}}"></td>
+							    <td th:text="${{p.Aeronave.modelo}}" ></td>
 						        <td th:text="${{p.origen.nombre}}" ></td>
 						        <td th:text="${{p.destino.nombre}}"></td>
-						        <td th:text="${{p.fechaYHora}}" ></td>
-						        <td th:text="${{p.tipo_vuelo}}"></td>
-						        <td th:text="${{p.Aeronave.modelo}}" ></td>
 						        <td>
 				                    <a th:href="@{/vueloEditar/{id}(id=${p.id})}" class="btn btn-primary">
 				                        editar
@@ -81,8 +83,7 @@
 				                    <a th:href="@{/vueloEditar/delete/{id}(id=${p.id})}" class="btn btn-primary">
 				                        eliminar
 				                    </a>
-				                </td>
-						        
+				                </td>						        
 					      </tr>
 					    </tbody>
 				    </table>		

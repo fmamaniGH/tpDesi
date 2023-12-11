@@ -22,11 +22,19 @@ public class VueloServiceImpl implements VueloService {
 
 	@Override
 	public List<Vuelo> filter(VueloBuscarForm filter) throws Excepcion {
+		/*
 		if(filter.getCodigo() ==null)
 			throw new Excepcion("Es necesario al menos un filtro");
 		else
 			return repo.findByCodigo(filter.getCodigo());
 
+		 */
+		
+		if (filter.getCodigo() == "")
+			return repo.findByCodigoAll();
+		else
+			return repo.findByCodigo(filter.getCodigo());
+		
 	}
 
 	@Override
@@ -37,7 +45,7 @@ public class VueloServiceImpl implements VueloService {
 
 	@Override
 	public void save(Vuelo c) throws Excepcion {
-		// TODO Auto-generated method stub
+		repo.save(c);
 		
 	}
 

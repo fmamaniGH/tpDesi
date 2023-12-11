@@ -14,5 +14,7 @@ public interface IVueloRepo extends JpaRepository<Vuelo, Long> {
 	@Query("FROM Vuelo v WHERE v.codigo like ?1")
 	List<Vuelo> findByCodigo(String codigo);
 	
-
+	
+	@Query("FROM Vuelo v")
+	List<Vuelo> findByCodigoAll();
 }

@@ -22,7 +22,7 @@ public class Vuelo {
 
 	private String tipo_vuelo;	
 
-	private Long precio;
+	private Double precio;
 	
 	@ManyToOne
 	private Aeronave aeronave;
@@ -72,11 +72,11 @@ public class Vuelo {
 		this.codigo = codigo;
 	}
 
-	public Long getPrecio() {
+	public Double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(Long precio) {
+	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
 	public Aeronave getAeronave() {

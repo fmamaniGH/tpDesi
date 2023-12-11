@@ -34,19 +34,19 @@ import tuti.desi.servicios.VueloService;
 @RequestMapping("/vueloEditar")
 public class VueloEditarController {
 	@Autowired
-    private CiudadService servicioCiudad;
+    private CiudadService serviceCiudad;
 	
 	@Autowired
-    private VueloService servicioVuelo;
+    private VueloService serviceVuelo;
 	
 	@Autowired
-    private AeronaveService servicioAeronave;
+    private AeronaveService serviceAeronave;
 		
 	
     @RequestMapping(path = {"", "/{id}"},method=RequestMethod.GET)
     public String preparaForm(Model modelo, @PathVariable("id") Optional<Long> id) throws Exception {
     	if (id.isPresent()) {
-    		Vuelo entity = servicioVuelo.getById(id.get());
+    		Vuelo entity = serviceVuelo.getById(id.get());
     		VueloForm form = new VueloForm(entity);
 			modelo.addAttribute("formBean", form);
 		} else {
@@ -60,16 +60,25 @@ public class VueloEditarController {
 	@RequestMapping(path = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteById(Model model, @PathVariable("id") Long id) 
 	{
-		servicioVuelo.deleteByid(id);
+		serviceVuelo.deleteByid(id);
 		return "redirect:/";
 	}
  
      
     @ModelAttribute("allAeronaves")
     public List<Aeronave> getAllAeronaves() {
-        return this.servicioAeronave.getAll();
+        return this.serviceAeronave.getAll();
     }
 	
+    @ModelAttribute("allCiudadesOrigen")
+    public List<Ciudad> getAllCiudadesOrigen() {
+        return this.serviceCiudad.getAll();
+    }
+    
+    @ModelAttribute("allCiudadesDestino")
+    public List<Ciudad> getAllCiudadesDestino() {
+        return this.serviceCiudad.getAll();
+    }
 
     @RequestMapping( method=RequestMethod.POST)
     public String submit(@ModelAttribute("formBean") @Valid  VueloForm formBean,BindingResult result, ModelMap modelo,@RequestParam String action) {
@@ -77,6 +86,7 @@ public class VueloEditarController {
     	
     	if(action.equals("Aceptar"))
     	{
+    		
     		if(result.hasErrors())
     		{   
     			modelo.addAttribute("formBean",formBean);
@@ -85,9 +95,13 @@ public class VueloEditarController {
     		else
     		{
     			try {
-					Vuelo p=formBean.toPojo();
-					p.setAeronave(servicioAeronave.getById(formBean.getIdAeronave()));
-					servicioVuelo.save(p);
+					Vuelo v=formBean.toPojo();
+					v.setAeronave(serviceAeronave.getById(formBean.getIdAeronave()));
+					v.setOrigen(serviceCiudad.getById(formBean.getIdOrigen()));
+					v.setDestino(serviceCiudad.getById(formBean.getIdDestino()));
+					v.setTipo_vuelo(formBean.getTipo_vuelo());
+					
+					serviceVuelo.save(v);
 					
 					return "redirect:/vueloBuscar";
 				} catch (Excepcion e) {
