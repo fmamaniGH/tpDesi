@@ -62,7 +62,7 @@ public class VueloBuscarController {
    	{   		
    		
    		try {
-   			List<Vuelo> vuelos = serviceVuelo.filter(formBean);
+   			List<Vuelo> vuelos = serviceVuelo.filter(formBean.getCodigo());
            	modelo.addAttribute("resultados",vuelos);
 			} catch (Exception e) {
 				ObjectError error = new ObjectError("globalError", e.getMessage());

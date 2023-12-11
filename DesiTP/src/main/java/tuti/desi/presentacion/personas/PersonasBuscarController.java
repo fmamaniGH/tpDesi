@@ -49,8 +49,6 @@ public class PersonasBuscarController {
     	
     	if(action.equals("Buscar"))
     	{
-    		
-    		
     		try {
     			List<Persona> personas = service.filter(formBean);
             	modelo.addAttribute("resultados",personas);

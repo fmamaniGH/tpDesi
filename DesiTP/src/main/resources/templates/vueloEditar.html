@@ -22,12 +22,29 @@
     
 <form  th:action="@{/vueloEditar}" th:object="${formBean}" method="post">
 	<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+	<input type="hidden" id="editando" th:field="*{editando}">
 	<input type="hidden" id="id" th:field="*{id}">
 	<table border="0" style="align-self: center;">		 
-		
+		<!--
+		<td><label th:text="#{persona.dni}" /></td>
+	            <div th:if="${formBean.editando}">
+		            	<td><label th:text="*{dni}"/></td>
+		            	<input type="hidden" id="id" th:field="*{dni}">
+	    
+		        </div>
+		        <div th:if="${!formBean.editando}">
+		            	<td><input type="number" th:field="*{dni}"/></td>
+		        </div>
+		-->
 		<tr>
             <td><label th:text="#{vuelo.codigo}" /></td>
-            <td><input type="text" th:field="*{codigo}" /></td> 
+	            <div th:if="${formBean.editando}">
+					<td><label th:text="*{codigo}"/></td>
+	            	<td><input type="hidden" th:field="*{codigo}" /></td> 
+            	</div>
+             	<div th:if="${!formBean.editando}">
+		            	<td><input type="text" th:field="*{codigo}"/></td>
+		        </div>
             <td> <p th:if="${#fields.hasErrors('codigo')}" th:errorclass="error" th:errors="*{codigo}" /> </td> 
         </tr>
         
@@ -100,7 +117,11 @@
 	      <td><input type="submit" name="action" value="Aceptar" /></td>
 	      <td><input type="submit" name="action" value="Cancelar" /></td>
       </tr>
-        
+        	         <div th:if="${#fields.hasErrors('global')}">
+			    <h3>Errores:</h3>
+			    <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+			</div>
+
     </table>
        
    

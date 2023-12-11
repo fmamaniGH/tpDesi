@@ -9,6 +9,7 @@ import tuti.desi.accesoDatos.IVueloRepo;
 import tuti.desi.entidades.Vuelo;
 import tuti.desi.excepciones.Excepcion;
 import tuti.desi.presentacion.vuelos.VueloBuscarForm;
+import tuti.desi.presentacion.vuelos.VueloForm;
 
 @Service
 public class VueloServiceImpl implements VueloService {
@@ -21,19 +22,12 @@ public class VueloServiceImpl implements VueloService {
 	}
 
 	@Override
-	public List<Vuelo> filter(VueloBuscarForm filter) throws Excepcion {
-		/*
-		if(filter.getCodigo() ==null)
-			throw new Excepcion("Es necesario al menos un filtro");
-		else
-			return repo.findByCodigo(filter.getCodigo());
-
-		 */
+	public List<Vuelo> filter(String filter) throws Excepcion {
 		
-		if (filter.getCodigo() == "")
+		if (filter == "")
 			return repo.findByCodigoAll();
 		else
-			return repo.findByCodigo(filter.getCodigo());
+			return repo.findByCodigo(filter);
 		
 	}
 

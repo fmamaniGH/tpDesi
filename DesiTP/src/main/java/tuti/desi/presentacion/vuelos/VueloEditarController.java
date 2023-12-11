@@ -81,7 +81,7 @@ public class VueloEditarController {
     }
 
     @RequestMapping( method=RequestMethod.POST)
-    public String submit(@ModelAttribute("formBean") @Valid  VueloForm formBean,BindingResult result, ModelMap modelo,@RequestParam String action) {
+    public String submit(@ModelAttribute("formBean") @Valid  VueloForm formBean,BindingResult result, ModelMap modelo,@RequestParam String action) throws Exception {
     	
     	
     	if(action.equals("Aceptar"))
@@ -95,14 +95,22 @@ public class VueloEditarController {
     		else
     		{
     			try {
-					Vuelo v=formBean.toPojo();
-					v.setAeronave(serviceAeronave.getById(formBean.getIdAeronave()));
-					v.setOrigen(serviceCiudad.getById(formBean.getIdOrigen()));
-					v.setDestino(serviceCiudad.getById(formBean.getIdDestino()));
-					v.setTipo_vuelo(formBean.getTipo_vuelo());
-					
-					serviceVuelo.save(v);
-					
+    				List<Vuelo> vuelos = serviceVuelo.filter(formBean.getCodigo());
+    				if (vuelos.size() == 0 )
+    				{
+						Vuelo v=formBean.toPojo();
+						v.setAeronave(serviceAeronave.getById(formBean.getIdAeronave()));
+						v.setOrigen(serviceCiudad.getById(formBean.getIdOrigen()));
+						v.setDestino(serviceCiudad.getById(formBean.getIdDestino()));
+						v.setTipo_vuelo(formBean.getTipo_vuelo());
+    				
+						serviceVuelo.save(v);
+    				}
+    				else
+    				{
+    					throw new Exception("Duplicate key '" + formBean.getCodigo() + "'."); 
+    				}
+
 					return "redirect:/vueloBuscar";
 				} catch (Excepcion e) {
 					if(e.getAtributo()==null) 

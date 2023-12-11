@@ -70,8 +70,7 @@ public class PersonasEditarController {
 //            result.addError(error);
             
     		if(result.hasErrors())
-    		{
-    			
+    		{    			
                 
     			modelo.addAttribute("formBean",formBean);
     			 return "personasEditar";
@@ -102,10 +101,6 @@ public class PersonasEditarController {
 	    			return "personasEditar";//Como existe un error me quedo en la misma pantalla
 				}
     		}
-
-    		
-        	
-        	
     	}
     
     	

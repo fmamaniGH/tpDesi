@@ -44,7 +44,7 @@ public class VueloForm {
 	
 	@NotNull(message = "el destino no puede ser nulo")
 	private Long idDestino;
-
+	private Boolean editando=false;
 	
 	public VueloForm() {
 		super();
@@ -60,33 +60,19 @@ public class VueloForm {
 		this.idOrigen = c.getOrigen().getId();
 		this.idDestino = c.getDestino().getId();
 		this.tipo_vuelo=c.getTipo_vuelo();
+		this.editando=true;
 	}	
 	
 	public Vuelo toPojo()
-	{
-		//Vuelo v = new Vuelo();
-		//Aeronave a = new Aeronave();
-		//a.setId(idAeronave);		
-		//v.setAeronave(a);
-		//return v;
-		
+	{		
 		Vuelo v = new Vuelo();
-		v.setId(this.getId());
+		if(this.editando)
+		{
+			v.setId(this.getId());
+		}
 		v.setCodigo(this.codigo);
 		v.setFechaYHora(fechaYHora);
 		v.setPrecio(precio);
-	
-		/*
-		if(!this.editando)
-		{
-			p.setDni(this.getDni());
-		}
-		p.setApellido(this.getApellido());
-		p.setNombre(this.getNombre());
-		p.setDni(this.getDni());
-		p.setFechaNacimiento(this.getFechaNacimiento());
-		p.setEditando(this.getEditando());
-		*/
 		
 		return v;		
 	}		
@@ -144,6 +130,13 @@ public class VueloForm {
 
 	public void setIdDestino(Long idDestino) {
 		this.idDestino = idDestino;
+	}
+	
+	public Boolean getEditando() {
+		return editando;
+	}
+	public void setEditando(Boolean editando) {
+		this.editando = editando;
 	}
 	
 }
