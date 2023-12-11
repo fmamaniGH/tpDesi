@@ -32,6 +32,12 @@ public class VueloServiceImpl implements VueloService {
 	}
 
 	@Override
+	public List<Vuelo> filterVuelo(String codigo, int year, int month, int day) {
+		return repo.findByCodigoAndDate(codigo, year, month, day);
+		
+	}
+	
+	@Override
 	public void deleteByid(Long id) {
 		repo.deleteById(id);
 		

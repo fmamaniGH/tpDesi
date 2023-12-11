@@ -12,6 +12,8 @@ public interface VueloService {
 	
 	List<Vuelo> filter(String filter) throws Excepcion;
 	
+	List<Vuelo> filterVuelo(String codigo, int year, int month, int day);
+	
 	void deleteByid(Long id);
 
 	void save(Vuelo c) throws Excepcion;

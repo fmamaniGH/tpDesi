@@ -1,6 +1,8 @@
 package tuti.desi.presentacion.vuelos;
 
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,10 +97,10 @@ public class VueloEditarController {
     		else
     		{
     			try {
-    				List<Vuelo> vuelos = serviceVuelo.filter(formBean.getCodigo());
-    				if (vuelos.size() == 0 )
+    				
+    				if(formBean.getEditando())
     				{
-						Vuelo v=formBean.toPojo();
+    					Vuelo v=formBean.toPojo();
 						v.setAeronave(serviceAeronave.getById(formBean.getIdAeronave()));
 						v.setOrigen(serviceCiudad.getById(formBean.getIdOrigen()));
 						v.setDestino(serviceCiudad.getById(formBean.getIdDestino()));
@@ -108,8 +110,29 @@ public class VueloEditarController {
     				}
     				else
     				{
-    					throw new Exception("Duplicate key '" + formBean.getCodigo() + "'."); 
+    					int year = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(formBean.getFechaYHora())).getYear();
+    					int month = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(formBean.getFechaYHora())).getMonthValue();
+    					int day = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(formBean.getFechaYHora())).getDayOfMonth();
+
+    					List<Vuelo> vuelos = serviceVuelo.filterVuelo(formBean.getCodigo(), year, month, day);
+        				if (vuelos.size() == 0 )
+        				{
+    						Vuelo v=formBean.toPojo();
+    						v.setAeronave(serviceAeronave.getById(formBean.getIdAeronave()));
+    						v.setOrigen(serviceCiudad.getById(formBean.getIdOrigen()));
+    						v.setDestino(serviceCiudad.getById(formBean.getIdDestino()));
+    						v.setTipo_vuelo(formBean.getTipo_vuelo());
+        				
+    						serviceVuelo.save(v);
+        				}
+        				else
+        				{
+        					throw new Exception("Duplicate key '" + formBean.getCodigo() + "'."); 
+        				}
     				}
+    				
+    				
+    				
 
 					return "redirect:/vueloBuscar";
 				} catch (Excepcion e) {
