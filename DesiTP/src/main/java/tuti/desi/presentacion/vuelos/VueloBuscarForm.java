@@ -16,11 +16,5 @@ public class VueloBuscarForm {
 	public void setcodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	
-	//public Long getIdCiudadSeleccionada() {
-	//	return IdCiudadSeleccionada;
-	//}
-	//public void setIdCiudadSeleccionada(Long idCiudadSeleccionada) {
-	//	IdCiudadSeleccionada = idCiudadSeleccionada;
-	//}
+
 }
