@@ -4,14 +4,19 @@ import java.util.Map;
 
 public class ImpuestosBuscarForm {
 
-    private Map<String, Object> filtros;
+	private String codigo;
+	//private Long IdCiudadSeleccionada;
+	
 
-    public Map<String, Object> getFiltros() {
-        return filtros;
-    }
+	public String getCodigo() {
+		if(codigo!=null)
+			return codigo;
+		else
+			return null;
+	}
 
-    public void setFiltros(Map<String, Object> filtros) {
-        this.filtros = filtros;
-    }
+	public void setcodigo(String codigo) {
+		this.codigo = codigo;
+	}
 
 }

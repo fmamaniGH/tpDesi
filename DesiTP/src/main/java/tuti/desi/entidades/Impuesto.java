@@ -1,6 +1,5 @@
 package tuti.desi.entidades;
 
-import java.math.BigDecimal;
 import jakarta.persistence.*;
 
 import jakarta.persistence.Entity;
@@ -8,7 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Impuesto {
@@ -17,13 +15,13 @@ public class Impuesto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private BigDecimal porcentajeIva;
+    private Double cotizacionDolar;
+   
+    private Double montoTasaInternacional;
     
-    private BigDecimal montoTasaNacional;
-        
-    private BigDecimal montoTasaInternacional;
-    
-    private BigDecimal cotizacionDolar;
+    private Double montoTasaNacional;        
+
+     private Double porcentajeIva;    
 
     @ManyToOne
     private Vuelo vuelo;
@@ -31,7 +29,7 @@ public class Impuesto {
     public Impuesto() {
     }
 
-    public Impuesto(Long id, BigDecimal porcentajeIva, BigDecimal montoTasaNacional, BigDecimal montoTasaInternacional, BigDecimal cotizacionDolar, Vuelo vuelo) {
+    public Impuesto(Long id, Double porcentajeIva, Double montoTasaNacional, Double montoTasaInternacional, Double cotizacionDolar, Vuelo vuelo) {
         this.id = id;
         this.porcentajeIva = porcentajeIva;
         this.montoTasaNacional = montoTasaNacional;
@@ -40,35 +38,42 @@ public class Impuesto {
         this.vuelo = vuelo;
     }
     
-    public BigDecimal getPorcentajeIva() {
+    public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+    public Double getPorcentajeIva() {
         return porcentajeIva;
     }
 
-    public void setPorcentajeIva(BigDecimal porcentajeIva) {
+    public void setPorcentajeIva(Double porcentajeIva) {
         this.porcentajeIva = porcentajeIva;
     }
 
-    public BigDecimal getMontoTasaNacional() {
+    public Double getMontoTasaNacional() {
         return montoTasaNacional;
     }
 
-    public void setMontoTasaNacional(BigDecimal montoTasaNacional) {
+    public void setMontoTasaNacional(Double montoTasaNacional) {
         this.montoTasaNacional = montoTasaNacional;
     }
     
-    public BigDecimal getMontoTasaInternacional() {
+    public Double getMontoTasaInternacional() {
         return montoTasaInternacional;
     }
 
-    public void setMontoTasaInternacional(BigDecimal montoTasaInternacional) {
+    public void setMontoTasaInternacional(Double montoTasaInternacional) {
         this.montoTasaInternacional = montoTasaInternacional;
     }
     
-    public BigDecimal getCotizacionDolar() {
+    public Double getCotizacionDolar() {
         return cotizacionDolar;
     }
 
-    public void setCotizacionDolar(BigDecimal cotizacionDolar) {
+    public void setCotizacionDolar(Double cotizacionDolar) {
         this.cotizacionDolar = cotizacionDolar;
     }
     

@@ -15,7 +15,7 @@
         <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
         <table border="1" style="align-self: center;">
             <tr>
-                <td><label th:text="#{impuesto.porcentajeIva}" /></td>
+                <td><label th:text="#{impuesto.iva}" /></td>
                 <td><input type="number" step="0.01" th:field="*{porcentajeIva}" required></td>
             </tr>
             <tr>
