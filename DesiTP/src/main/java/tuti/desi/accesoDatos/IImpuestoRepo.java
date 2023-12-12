@@ -14,3 +14,4 @@ public interface IImpuestoRepo extends JpaRepository<Impuesto, Long> {
 	@Query("FROM Impuesto i")
 	List<Impuesto> findAll();
 }
+//commit
