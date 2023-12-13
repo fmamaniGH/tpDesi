@@ -59,7 +59,7 @@
 					        <th ><label th:text="#{impuesto.tasaInt}" /></th>
 					        <th ><label th:text="#{impuesto.tasaNac}" /></th>
 					        <th ><label th:text="#{impuesto.iva}" /></th>
-					        <th ><label th:text="#{impuesto.aeronave}" /></th>					        
+					        <th ><label th:text="#{impuesto.vuelo}" /></th>					        
 					        <th ></th>
 					        <th ></th>
 					      </tr>
@@ -70,14 +70,14 @@
 							    <td th:text="${{p.montoTasaInternacional}}" ></td>
 							    <td th:text="${{p.montoTasaNacional}}" ></td>
 							    <td th:text="${{p.porcentajeIva}}"></td>
-							    <td th:text="${{p.vuelo.Aeronave.modelo}}" ></td>
+							    <td th:text="${p.vuelo.codigo} + '  -  ' + ${p.vuelo.fechaYHora}"></td>
 						        <td>
-				                    <a th:href="@{/vueloEditar/{id}(id=${p.id})}" class="btn btn-primary">
+				                    <a th:href="@{/impuestosEditar/{id}(id=${p.id})}" class="btn btn-primary">
 				                        editar
 				                    </a>
 				                </td>
 				                <td>
-				                    <a th:href="@{/vueloEditar/delete/{id}(id=${p.id})}" class="btn btn-primary">
+				                    <a th:href="@{/impuestosEditar/delete/{id}(id=${p.id})}" class="btn btn-primary">
 				                        eliminar
 				                    </a>
 				                </td>						        

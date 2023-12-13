@@ -25,15 +25,13 @@ public class ImpuestoServiceImpl implements ImpuestoService {
     
     @Override
     public void guardarImpuesto(Impuesto imp) {
-        //validarImpuesto(imp);
         repo.save(imp);
     }
 
-    @Override
-    public void actualizarImpuesto(Impuesto imp) {
-        //validarImpuesto(imp);
-        repo.save(imp);
-    }
-
+	@Override
+	public void eliminaByid(Long id) {
+		repo.deleteById(id);
+		
+	}
 
 }

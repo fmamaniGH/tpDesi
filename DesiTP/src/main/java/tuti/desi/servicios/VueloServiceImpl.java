@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tuti.desi.accesoDatos.IVueloRepo;
+import tuti.desi.entidades.Persona;
 import tuti.desi.entidades.Vuelo;
 import tuti.desi.excepciones.Excepcion;
 import tuti.desi.presentacion.vuelos.VueloBuscarForm;
@@ -47,6 +48,12 @@ public class VueloServiceImpl implements VueloService {
 	public void save(Vuelo c) throws Excepcion {
 		repo.save(c);
 		
+	}
+	
+	@Override
+	public List<Vuelo> getAll() {
+		
+		return repo.findAll();
 	}
 
 }
