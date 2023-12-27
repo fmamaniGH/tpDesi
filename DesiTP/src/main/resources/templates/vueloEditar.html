@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title><span th:text="#{ciudad.editar.titulo}"/></title>
+    <title>Registrar vuelo</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
@@ -55,16 +55,16 @@
         </tr>
         
 		<tr>
-            <td><label th:text="#{vuelo.precio}" /></td>
-            <td><input type="text" th:field="*{precio}" /></td> 
-            <td> <p th:if="${#fields.hasErrors('precio')}" th:errorclass="error" th:errors="*{precio}" /> </td> 
+            <td><label th:text="#{vuelo.precioPasaje}" /></td>
+            <td><input type="text" th:field="*{precioPasaje}" /></td> 
+            <td> <p th:if="${#fields.hasErrors('precioPasaje')}" th:errorclass="error" th:errors="*{precioPasaje}" /> </td> 
         </tr>
         
 
         <tr>
             <td><label th:text="#{vuelo.tipoVuelo}" /></td>
             <td>
-		        <select th:field="*{tipo_vuelo}">
+		        <select th:field="*{tipoVuelo}">
 					<option th:value="null" text="Seleccione una opción"></option>
 					<!--<option th:value="Internacional" text="Internacional"></option>
 					<option th:value="Nacional" text="Nacional"></option>	-->

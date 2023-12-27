@@ -1,119 +1,138 @@
 package tuti.desi.presentacion.vuelos;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import tuti.desi.entidades.Aeronave;
-import tuti.desi.entidades.Ciudad;
-import tuti.desi.entidades.Persona;
 import tuti.desi.entidades.Vuelo;
 
 public class VueloForm {
-	
+
 	private Long id;
-	
+
 	@NotNull(message = "el codigo no puede ser nulo")
-	@Size(min=5, max=10, message = "Longitud entre 5 y 10 caracteres")
+	@Size(min = 5, max = 10, message = "Longitud entre 5 y 10 caracteres")
 	private String codigo;
+
+	public Integer cantidadDeAsientos;
 
 	@NotNull(message = "la fecha y hora no puede ser nulo")
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-	private Date fechaYHora;
+	private LocalDateTime fechaYHora;
 
 	@NotNull(message = "el tipo de vuelo no puede ser nulo")
-	private String tipo_vuelo;	
-	
-	@NotNull(message = "el dni no puede ser nulo")
+	private String tipoVuelo;
+
+	@NotNull(message = "el precio no puede ser nulo")
 	@Min(value = 0, message = "el precio debe ser mayor a 0")
 	@DecimalMin(value = "0.0", inclusive = false)
-    @Digits(integer=7, fraction=2)
-	private Double precio;
-	
-	@NotNull(message = "la aerona no puede ser nula")
+	@Digits(integer = 7, fraction = 2)
+	private BigDecimal precioPasaje;
+
+	@NotNull(message = "la aeronave no puede ser nula")
 	private Long idAeronave;
-	
+
 	@NotNull(message = "el origen no puede ser nulo")
 	private Long idOrigen;
-	
+
 	@NotNull(message = "el destino no puede ser nulo")
 	private Long idDestino;
-	private Boolean editando=false;
-	
+
+	private String estado;
+
+	private Boolean editando = false;
+
 	public VueloForm() {
 		super();
 	}
-	
-	public VueloForm(Vuelo c) {
+
+	public VueloForm(Vuelo vuelo) {
 		super();
-		this.id=c.getId();
-		this.codigo =c.getCodigo();
-		this.fechaYHora =c.getFechaYHora();
-		this.precio = c.getPrecio();
-		this.idAeronave=c.getAeronave().getId();		
-		this.idOrigen = c.getOrigen().getId();
-		this.idDestino = c.getDestino().getId();
-		this.tipo_vuelo=c.getTipo_vuelo();
-		this.editando=true;
-	}	
-	
-	public Vuelo toPojo()
-	{		
-		Vuelo v = new Vuelo();
-		if(this.editando)
-		{
-			v.setId(this.getId());
+		this.id = vuelo.getId();
+		this.codigo = vuelo.getCodigo();
+		this.cantidadDeAsientos = vuelo.getCantidadDeAsientos();
+		this.fechaYHora = vuelo.getFechaYHora();
+		this.tipoVuelo = vuelo.getTipoVuelo();
+		this.precioPasaje = vuelo.getPrecioPasaje();
+		this.idAeronave = vuelo.getAeronave().getId();
+		this.idOrigen = vuelo.getOrigen().getId();
+		this.idDestino = vuelo.getDestino().getId();
+		this.estado = vuelo.getEstado();
+		this.editando = true;
+	}
+
+	public Vuelo toPojo() {
+		Vuelo vuelo = new Vuelo();
+		if (this.editando) {
+			vuelo.setId(this.getId());
 		}
-		v.setCodigo(this.codigo);
-		v.setFechaYHora(fechaYHora);
-		v.setPrecio(precio);
-		
-		return v;		
-	}		
-	
+		vuelo.setCodigo(this.codigo);
+		vuelo.setFechaYHora(this.fechaYHora);
+		vuelo.setPrecioPasaje(this.precioPasaje);
+
+		return vuelo;
+	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
-	}	
-	
-	public Long getIdAeronave() {
-		return idAeronave;
 	}
-	public void setIdAeronave(Long idAeronave) {
-		this.idAeronave= idAeronave;
-	}
-	
+
 	public String getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	public Date getFechaYHora() {
+
+	public Integer getCantidadDeAsientos() {
+		return cantidadDeAsientos;
+	}
+
+	public void setCantidadDeAsientos(Integer cantidadDeAsientos) {
+		this.cantidadDeAsientos = cantidadDeAsientos;
+	}
+
+	public LocalDateTime getFechaYHora() {
 		return fechaYHora;
 	}
-	public void setFechaYHora(Date fechaYHora) {
+
+	public void setFechaYHora(LocalDateTime fechaYHora) {
 		this.fechaYHora = fechaYHora;
 	}
-	public String getTipo_vuelo() {
-		return tipo_vuelo;
+
+	public String getTipoVuelo() {
+		return tipoVuelo;
 	}
-	public void setTipo_vuelo(String tipo_vuelo) {
-		this.tipo_vuelo = tipo_vuelo;
+
+	public void setTipoVuelo(String tipoVuelo) {
+		this.tipoVuelo = tipoVuelo;
 	}
-	public Double getPrecio() {
-		return precio;
+
+	public BigDecimal getPrecioPasaje() {
+		return precioPasaje;
 	}
-	public void setPrecio(Double precio) {
-		this.precio = precio;
+
+	public void setPrecioPasaje(BigDecimal precioPasaje) {
+		this.precioPasaje = precioPasaje;
+	}
+
+	public Long getIdAeronave() {
+		return idAeronave;
+	}
+
+	public void setIdAeronave(Long idAeronave) {
+		this.idAeronave = idAeronave;
 	}
 
 	public Long getIdOrigen() {
@@ -131,12 +150,20 @@ public class VueloForm {
 	public void setIdDestino(Long idDestino) {
 		this.idDestino = idDestino;
 	}
-	
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 	public Boolean getEditando() {
 		return editando;
 	}
+
 	public void setEditando(Boolean editando) {
 		this.editando = editando;
 	}
-	
 }

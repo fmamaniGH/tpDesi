@@ -8,8 +8,6 @@ import tuti.desi.presentacion.personas.PersonasBuscarForm;
 
 public interface PersonaService {
 
-
-
 	List<Persona> getAll();
 
 	List<Persona> filter(PersonasBuscarForm filter) throws Excepcion;
@@ -29,7 +27,6 @@ public interface PersonaService {
 	 */
 	Persona getPersonaById(Long idPersona) throws Exception;
 
-	void deletePersonaByid(Long id);
+	void deletePersonaById(Long id);
 
-	
 }

@@ -19,64 +19,56 @@ import tuti.desi.entidades.Persona;
 import tuti.desi.servicios.CiudadService;
 import tuti.desi.servicios.PersonaService;
 
-
 @Controller
 @RequestMapping("/personasBuscar")
 public class PersonasBuscarController {
+
 	@Autowired
-    private PersonaService service;
+	private PersonaService service;
+
 	@Autowired
-    private CiudadService serviceCiudad;
-     
-    @RequestMapping(method=RequestMethod.GET)
-    public String preparaForm(Model modelo) {
-    	PersonasBuscarForm form =  new PersonasBuscarForm();
-    	form.setIdCiudadSeleccionada(1L); //Esto es por ejemplo, si quisiera setear un valor por defecto en el filtro de ciudad 
-//    	 form.setCiudades(serviceCiudad.getAll());    //  en lugar de esto hacemos @ModelAttribute("allCiudades")
-       modelo.addAttribute("formBean",form);
-       return "personasBuscar";
-    }
-     
-    
-    @ModelAttribute("allCiudades")
-    public List<Ciudad> getAllCiudades() {
-        return this.serviceCiudad.getAll();
-    }
-    
-    @RequestMapping( method=RequestMethod.POST)
-    public String submit( @ModelAttribute("formBean")  @Valid  PersonasBuscarForm formBean,BindingResult result, ModelMap modelo,@RequestParam String action) {
-         	
-    	
-    	if(action.equals("Buscar"))
-    	{
-    		try {
-    			List<Persona> personas = service.filter(formBean);
-            	modelo.addAttribute("resultados",personas);
+	private CiudadService serviceCiudad;
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String preparaForm(Model modelo) {
+		PersonasBuscarForm form = new PersonasBuscarForm();
+		form.setIdCiudadSeleccionada(0L);
+		modelo.addAttribute("formBean", form);
+		return "personasBuscar";
+	}
+
+	@ModelAttribute("allCiudades")
+	public List<Ciudad> getAllCiudades() {
+		return this.serviceCiudad.getAll();
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public String submit(@ModelAttribute("formBean") @Valid PersonasBuscarForm formBean, BindingResult result,
+			ModelMap modelo, @RequestParam String action) {
+
+		if (action.equals("Buscar")) {
+			try {
+				List<Persona> personas = service.filter(formBean);
+				modelo.addAttribute("resultados", personas);
 			} catch (Exception e) {
 				ObjectError error = new ObjectError("globalError", e.getMessage());
-	            result.addError(error);
+				result.addError(error);
 			}
-        	modelo.addAttribute("formBean",formBean);
-        	return "personasBuscar";
-    	}
-    
-    	
-    	if(action.equals("Cancelar"))
-    	{
-    		modelo.clear();
-    		return "redirect:/";
-    	}
-    	
-    	if(action.equals("Registrar"))
-    	{
-    		modelo.clear();
-    		return "redirect:/personasEditar";
-    	}
-    		
-    	return "redirect:/";
-    	
-    	
-    }
+			modelo.addAttribute("formBean", formBean);
+			return "personasBuscar";
+		}
 
- 
+		if (action.equals("Cancelar")) {
+			modelo.clear();
+			return "redirect:/";
+		}
+
+		if (action.equals("Registrar")) {
+			modelo.clear();
+			return "redirect:/personasEditar";
+		}
+
+		return "redirect:/";
+	}
+
 }
