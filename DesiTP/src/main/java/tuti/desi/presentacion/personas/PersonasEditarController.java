@@ -52,7 +52,7 @@ public class PersonasEditarController {
 	@RequestMapping(path = "/delete/{id}", method = RequestMethod.GET)
 	public String deletePersonaById(Model model, @PathVariable("id") Long id) 
 	{
-		service.deletePersonaByid(id);
+		service.deletePersonaById(id);
 		return "redirect:/personasBuscar";
 	}
  
