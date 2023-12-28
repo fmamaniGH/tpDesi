@@ -1,7 +1,5 @@
 package tuti.desi.presentacion.vuelos;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +28,7 @@ import tuti.desi.servicios.VueloService;
 @Controller
 @RequestMapping("/vueloEditar")
 public class VueloEditarController {
+
 	@Autowired
 	private CiudadService serviceCiudad;
 
@@ -55,7 +54,7 @@ public class VueloEditarController {
 	@RequestMapping(path = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteById(Model model, @PathVariable("id") Long id) {
 		serviceVuelo.deleteByid(id);
-		return "redirect:/";
+		return "redirect:/vueloBuscar";
 	}
 
 	@ModelAttribute("allAeronaves")
@@ -84,27 +83,23 @@ public class VueloEditarController {
 				return "vueloEditar";
 			} else {
 				try {
-
 					if (formBean.getEditando()) {
 						Vuelo v = formBean.toPojo();
-						v.setAeronave(serviceAeronave.getById(formBean.getIdAeronave()));
+						Aeronave aeronave = serviceAeronave.getById(formBean.getIdAeronave());
+						v.setAeronave(aeronave);
+						v.setCantidadDeAsientos(aeronave.getCapacidad());
 						v.setOrigen(serviceCiudad.getById(formBean.getIdOrigen()));
 						v.setDestino(serviceCiudad.getById(formBean.getIdDestino()));
 						v.setTipoVuelo(formBean.getTipoVuelo());
 
 						serviceVuelo.save(v);
 					} else {
-						int year = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(formBean.getFechaYHora()))
-								.getYear();
-						int month = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(formBean.getFechaYHora()))
-								.getMonthValue();
-						int day = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(formBean.getFechaYHora()))
-								.getDayOfMonth();
-
-						List<Vuelo> vuelos = serviceVuelo.filterVuelo(formBean.getCodigo(), year, month, day);
+						List<Vuelo> vuelos = serviceVuelo.filter(formBean.getCodigo());
 						if (vuelos.size() == 0) {
 							Vuelo v = formBean.toPojo();
-							v.setAeronave(serviceAeronave.getById(formBean.getIdAeronave()));
+							Aeronave aeronave = serviceAeronave.getById(formBean.getIdAeronave());
+							v.setAeronave(aeronave);
+							v.setCantidadDeAsientos(aeronave.getCapacidad());
 							v.setOrigen(serviceCiudad.getById(formBean.getIdOrigen()));
 							v.setDestino(serviceCiudad.getById(formBean.getIdDestino()));
 							v.setTipoVuelo(formBean.getTipoVuelo());

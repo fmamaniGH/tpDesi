@@ -31,7 +31,7 @@ public class Vuelo {
 	private Integer cantidadDeAsientos;
 
 	@Column(nullable = false, name = "fecha_hora")
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime fechaYHora;
 
 	@Column(name = "tipo_vuelo", nullable = false)

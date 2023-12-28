@@ -20,7 +20,7 @@ public class Asiento {
 	private Persona persona;
 
 	@ManyToOne
-	@JoinColumn(name = "vuelo_id", nullable = false)
+	@JoinColumn(name = "vuelo_id", nullable = true)
 	private Vuelo vuelo;
 
 	public Asiento() {

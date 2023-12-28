@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Reservar vuelo</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+
+<body>
+	<div class="container text-center">
+		<h1 th:text="#{empresa}"></h1>
+
+		<p>Reservas para el cliente con DNI: <label th:text="${dni}"></label></p>
+
+		<!-- Formulario para seleccionar vuelo -->
+		<form th:action="@{'/reservar/' + ${dni}}" id="vuelo-form" method="get">
+			<div th:if="${#lists.isEmpty(allVuelos)}">
+				<div class="alert alert-info" role="alert">
+					<span>No existen vuelos cargados para realizar la reserva</span>
+				</div>
+			</div>
+			<div th:unless="${#lists.isEmpty(allVuelos)}" th:if="${idVuelo == null}">
+				<label for="vuelo">Seleccione un vuelo:</label>
+				<select id="vuelo" name="vuelo">
+					<option th:each="vuelo : ${allVuelos}" th:value="${vuelo.id}" th:text="${vuelo.codigo}">
+					</option>
+				</select>
+				<button type="submit" class="btn btn-success">Seleccionar</button>
+			</div>
+		</form>
+
+		<div th:if="${idVuelo != null}">
+			<p>El Id del vuelo seleccionado es: <label th:text="${idVuelo}"></label></p>
+			<p>El precio de cada asiento es de $<label th:text="${precio}"></label></p>
+
+			<div th:if="${asientos != null && asientos.size > 0}">
+				<form th:action="@{'/reservar/' + ${dni} + '/' + ${idVuelo}}" method="post">
+					<input type="hidden" name="vuelo" th:value="${idVuelo}" />
+					<input type="hidden" name="dni" th:value="${dni}" />
+					<label for="vuelo">Seleccione un asiento:</label>
+					<select id="asiento" name="asiento">
+						<option th:each="asiento : ${asientos}" th:value="${asiento.id}"
+							th:text="'F' + ${asiento.fila} + 'C' + ${asiento.columna}"></option>
+					</select>
+					<button type="submit" class="btn btn-success">Emitir ticket</button>
+				</form>
+			</div>
+		</div>
+		<br>
+		<div th:if="${error}">
+			<div class="alert alert-danger" role="alert">
+				<p th:text="${error}"></p>
+			</div>
+		</div>
+		<div th:if="${exito}">
+			<div class="alert alert-success" role="alert">
+				<p th:text="${exito}"></p>
+			</div>
+		</div>
+		<div>
+			<a class="btn btn-secondary" th:href="@{'/reservar/' + ${dni}}">Cancelar</a>
+		</div>
+	</div>
+
+	<!-- Bootstrap JS y Popper.js (opcional) para funcionalidades avanzadas -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

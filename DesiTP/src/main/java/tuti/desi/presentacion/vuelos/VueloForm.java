@@ -23,7 +23,7 @@ public class VueloForm {
 	public Integer cantidadDeAsientos;
 
 	@NotNull(message = "la fecha y hora no puede ser nulo")
-	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime fechaYHora;
 
 	@NotNull(message = "el tipo de vuelo no puede ser nulo")

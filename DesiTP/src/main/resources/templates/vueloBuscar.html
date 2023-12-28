@@ -37,18 +37,17 @@
 				</tr>
 			</table>
 
-			<table class="resultados" border="0" style="align-self: center;">
+			<table class="table table-bordered table-striped mt-4">
 				<thead th:if="${not #lists.isEmpty(resultados)}">
 					<tr>
-						<th><label th:text="#{vuelo.codigo}" /></th>
-						<th><label th:text="#{vuelo.fechaYHora}" /></th>
-						<th><label th:text="#{vuelo.precioPasaje}" /></th>
-						<th><label th:text="#{vuelo.tipoVuelo}" /></th>
-						<th><label th:text="#{vuelo.aeronave}" /></th>
-						<th><label th:text="#{vuelo.origen}" /></th>
-						<th><label th:text="#{vuelo.destino}" /></th>
-						<th></th>
-						<th></th>
+						<th>Código</th>
+						<th>Fecha Hora</th>
+						<th>Precio</th>
+						<th>Tipo de Vuelo</th>
+						<th>Avión</th>
+						<th>Origen</th>
+						<th>Destino</th>
+						<th>Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -61,14 +60,14 @@
 						<td th:text="${{p.origen.nombre}}"></td>
 						<td th:text="${{p.destino.nombre}}"></td>
 						<td>
-							<a th:href="@{/vueloEditar/{id}(id=${p.id})}" class="btn btn-primary">
-								editar
-							</a>
-						</td>
-						<td>
-							<a th:href="@{/vueloEditar/delete/{id}(id=${p.id})}" class="btn btn-primary">
-								eliminar
-							</a>
+							<div class="btn-group">
+								<a th:href="@{/vueloEditar/{id}(id=${p.id})}" class="btn btn-primary">
+									Editar
+								</a>
+								<a th:href="@{/vueloEditar/delete/{id}(id=${p.id})}" class="btn btn-danger">
+									Eliminar
+								</a>
+							</div>
 						</td>
 					</tr>
 				</tbody>

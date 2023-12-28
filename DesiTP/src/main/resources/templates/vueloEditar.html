@@ -1,31 +1,34 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Registrar vuelo</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+	<title>Registrar vuelo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/main.css}" />
 </head>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
 
 <body>
-	
+
 	<div class="starter-template">
-        <h1><span  th:text="#{empresa}" /></h1>
-        <h2 th:text="${formBean.id} ? #{vuelo.editar.titulo}: #{vuelo.registrar.titulo}" />
-        
-    </div>
-    
-<form  th:action="@{/vueloEditar}" th:object="${formBean}" method="post">
-	<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
-	<input type="hidden" id="editando" th:field="*{editando}">
-	<input type="hidden" id="id" th:field="*{id}">
-	<table border="0" style="align-self: center;">		 
-		<!--
+		<h1><span th:text="#{empresa}" /></h1>
+		<h2 th:text="${formBean.id} ? #{vuelo.editar.titulo}: #{vuelo.registrar.titulo}" />
+
+	</div>
+
+	<form th:action="@{/vueloEditar}" th:object="${formBean}" method="post">
+		<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+		<input type="hidden" id="editando" th:field="*{editando}">
+		<input type="hidden" id="id" th:field="*{id}">
+		<table border="0" style="align-self: center;">
+			<!--
 		<td><label th:text="#{persona.dni}" /></td>
 	            <div th:if="${formBean.editando}">
 		            	<td><label th:text="*{dni}"/></td>
@@ -36,95 +39,98 @@
 		            	<td><input type="number" th:field="*{dni}"/></td>
 		        </div>
 		-->
-		<tr>
-            <td><label th:text="#{vuelo.codigo}" /></td>
-	            <div th:if="${formBean.editando}">
-					<td><label th:text="*{codigo}"/></td>
-	            	<td><input type="hidden" th:field="*{codigo}" /></td> 
-            	</div>
-             	<div th:if="${!formBean.editando}">
-		            	<td><input type="text" th:field="*{codigo}"/></td>
-		        </div>
-            <td> <p th:if="${#fields.hasErrors('codigo')}" th:errorclass="error" th:errors="*{codigo}" /> </td> 
-        </tr>
-        
-        <tr>
-            <td><label th:text="#{vuelo.fechaYHora}" /></td>
-            <td><input type="text" th:field="*{fechaYHora}" />(yyyy-MM-dd HH:mm:ss)</td> 
-            <td> <p th:if="${#fields.hasErrors('fechaYHora')}" th:errorclass="error" th:errors="*{fechaYHora}" /> </td> 
-        </tr>
-        
-		<tr>
-            <td><label th:text="#{vuelo.precioPasaje}" /></td>
-            <td><input type="text" th:field="*{precioPasaje}" /></td> 
-            <td> <p th:if="${#fields.hasErrors('precioPasaje')}" th:errorclass="error" th:errors="*{precioPasaje}" /> </td> 
-        </tr>
-        
+			<tr>
+				<td><label th:text="#{vuelo.codigo}" /></td>
+				<div th:if="${formBean.editando}">
+					<td><label th:text="*{codigo}" /></td>
+					<td><input type="hidden" th:field="*{codigo}" /></td>
+				</div>
+				<div th:if="${!formBean.editando}">
+					<td><input type="text" th:field="*{codigo}" /></td>
+				</div>
+				<td>
+					<p th:if="${#fields.hasErrors('codigo')}" th:errorclass="error" th:errors="*{codigo}" />
+				</td>
+			</tr>
 
-        <tr>
-            <td><label th:text="#{vuelo.tipoVuelo}" /></td>
-            <td>
-		        <select th:field="*{tipoVuelo}">
-					<option th:value="null" text="Seleccione una opción"></option>
-					<!--<option th:value="Internacional" text="Internacional"></option>
+			<tr>
+				<td><label for="fechaHoraPartida">Fecha Hora Partida:</label></td>
+				<td><input required type="datetime-local" id="fechaHoraPartida" name="fechaHoraPartida"
+						th:field="*{fechaYHora}" class="form-control" pattern="yyyy-MM-dd'T'HH:mm">
+				</td>
+				<td>
+					<p th:if="${#fields.hasErrors('fechaYHora')}" th:errorclass="error" th:errors="*{fechaYHora}" />
+				</td>
+			</tr>
+
+			<tr>
+				<td>Precio</td>
+				<td><input type="text" th:field="*{precioPasaje}" /></td>
+				<td>
+					<p th:if="${#fields.hasErrors('precioPasaje')}" th:errorclass="error" th:errors="*{precioPasaje}" />
+				</td>
+			</tr>
+
+
+			<tr>
+				<td><label th:text="#{vuelo.tipoVuelo}" /></td>
+				<td>
+					<select th:field="*{tipoVuelo}">
+						<option th:value="null" text="Seleccione una opción"></option>
+						<!--<option th:value="Internacional" text="Internacional"></option>
 					<option th:value="Nacional" text="Nacional"></option>	-->
-					 	<option value="Internacional">Internacional</option>
-					    <option value="Nacional" >Nacional</option>		    
-				</select>
-			</td>
-		</tr>
+						<option value="Internacional">Internacional</option>
+						<option value="Nacional">Nacional</option>
+					</select>
+				</td>
+			</tr>
 
-        <tr>
-            <td><label th:text="#{vuelo.aeronave}" /></td>
-            <td>
-		        <select th:field="*{idAeronave}">
-					<option th:value="null" text="Seleccione una opción"></option>
-				    <option th:each="c : ${allAeronaves}" 
-				          th:value="${c.id}" 
-				          th:text="${c.modelo}"></option>
-				</select>
-			</td>
-		</tr>
+			<tr>
+				<td><label th:text="#{vuelo.aeronave}" /></td>
+				<td>
+					<select th:field="*{idAeronave}">
+						<option th:value="null" text="Seleccione una opción"></option>
+						<option th:each="c : ${allAeronaves}" th:value="${c.id}" th:text="${c.modelo}"></option>
+					</select>
+				</td>
+			</tr>
 
-    	<tr>
-            <td><label th:text="#{vuelo.origen}" /></td>
-            <td>
-		        <select th:field="*{idOrigen}">
-					<option th:value="null" text="Seleccione una opción"></option>
-				    <option th:each="c : ${allCiudadesOrigen}" 
-				          th:value="${c.id}" 
-				          th:text="${c.nombre}"></option>
-				</select>
-			</td>
-		</tr>
-   
-    	<tr>
-            <td><label th:text="#{vuelo.destino}" /></td>
-            <td>
-		        <select th:field="*{idDestino}">
-					<option th:value="null" text="Seleccione una opción"></option>
-				    <option th:each="c : ${allCiudadesDestino}" 
-				          th:value="${c.id}" 
-				          th:text="${c.nombre}"></option>
-				</select>
-			</td>
-		</tr>
+			<tr>
+				<td><label th:text="#{vuelo.origen}" /></td>
+				<td>
+					<select th:field="*{idOrigen}">
+						<option th:value="null" text="Seleccione una opción"></option>
+						<option th:each="c : ${allCiudadesOrigen}" th:value="${c.id}" th:text="${c.nombre}"></option>
+					</select>
+				</td>
+			</tr>
 
-  </table>
-  <table class="botones">
+			<tr>
+				<td><label th:text="#{vuelo.destino}" /></td>
+				<td>
+					<select th:field="*{idDestino}">
+						<option th:value="null" text="Seleccione una opción"></option>
+						<option th:each="c : ${allCiudadesDestino}" th:value="${c.id}" th:text="${c.nombre}"></option>
+					</select>
+				</td>
+			</tr>
 
-      <tr>
-	      <td><input type="submit" name="action" value="Aceptar" /></td>
-	      <td><input type="submit" name="action" value="Cancelar" /></td>
-      </tr>
-        	         <div th:if="${#fields.hasErrors('global')}">
-			    <h3>Errores:</h3>
-			    <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+		</table>
+		<table class="botones">
+
+			<tr>
+				<td><input type="submit" name="action" value="Aceptar" /></td>
+				<td><input type="submit" name="action" value="Cancelar" /></td>
+			</tr>
+			<div th:if="${#fields.hasErrors('global')}">
+				<h3>Errores:</h3>
+				<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
 			</div>
 
-    </table>
-       
-   
-</form>
+		</table>
+
+
+	</form>
 </body>
-</html>	
+
+</html>

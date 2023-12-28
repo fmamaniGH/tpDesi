@@ -13,7 +13,7 @@
 <body>
 	<div class="container text-center">
 		<h1 th:text="#{empresa}"></h1>
-		<h2 th:text="#{persona.buscar.titulo}"></h2>
+		<p>Gestionador de Clientes</p>
 
 		<form th:action="@{/personasBuscar}" th:object="${formBean}" method="post" class="my-4">
 			<div th:each="err : ${#fields.errors('global')}" class="alert alert-danger" role="alert">
@@ -23,21 +23,21 @@
 			<div class="row justify-content-center">
 				<div class="col-md-6">
 					<div class="form-group row">
-						<label for="dni" class="col-sm-4 col-form-label" th:text="#{persona.dni}"></label>
+						<label for="dni" class="col-sm-4 col-form-label text-right">DNI:</label>
 						<div class="col-sm-8">
 							<input type="number" class="form-control" id="dni" th:field="*{dni}" />
 						</div>
 					</div>
 
 					<div class="form-group row">
-						<label for="nombre" class="col-sm-4 col-form-label" th:text="#{persona.nombre}"></label>
+						<label for="nombre" class="col-sm-4 col-form-label text-right">Nombre:</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" id="nombre" th:field="*{nombre}" />
 						</div>
 					</div>
 
 					<div class="form-group row">
-						<label for="ciudad" class="col-sm-4 col-form-label" th:text="#{persona.ciudad}"></label>
+						<label for="ciudad" class="col-sm-4 col-form-label text-right">Ciudad:</label>
 						<div class="col-sm-8">
 							<select class="form-control" id="ciudad" th:field="*{idCiudadSeleccionada}">
 								<option th:value="null">Seleccione una opción</option>
@@ -64,28 +64,29 @@
 				<table class="table table-bordered table-striped mt-4">
 					<thead th:if="${not #lists.isEmpty(resultados)}">
 						<tr>
-							<th th:text="#{persona.dni}"></th>
-							<th th:text="#{persona.nombre}"></th>
-							<th th:text="#{persona.apellido}"></th>
-							<th th:text="#{persona.f.nac}"></th>
-							<th th:text="#{persona.ciudad}"></th>
+							<th>DNI</th>
+							<th>Apellido</th>
+							<th>Nombre</th>
+							<th>Ciudad</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="p : ${resultados}">
 							<td th:text="${{p.dni}}"></td>
-							<td th:text="${{p.nombre}}"></td>
 							<td th:text="${{p.apellido}}"></td>
-							<td th:text="${{p.fechaNacimiento}}"></td>
+							<td th:text="${{p.nombre}}"></td>
 							<td th:text="${{p.ciudad.nombre}}"></td>
 							<td>
 								<div class="btn-group">
 									<a th:href="@{/personasEditar/{id}(id=${p.dni})}" class="btn btn-primary">
-										editar
+										Editar
+									</a>
+									<a th:href="@{/reservar/{id}(id=${p.dni})}" class="btn btn-success">
+										Reservar vuelo
 									</a>
 									<a th:href="@{/personasEditar/delete/{id}(id=${p.dni})}" class="btn btn-danger">
-										eliminar
+										Eliminar
 									</a>
 								</div>
 							</td>

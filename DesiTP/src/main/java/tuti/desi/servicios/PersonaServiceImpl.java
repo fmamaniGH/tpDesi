@@ -29,8 +29,14 @@ public class PersonaServiceImpl implements PersonaService {
 		// https://docs.spring.io/spring-data/jpa/docs/1.5.0.RELEASE/reference/html/jpa.repositories.html
 		if (filter.getNombre() == null && filter.getDni() == null && filter.getIdCiudadSeleccionada() == null)
 			throw new Excepcion("Es necesario al menos un filtro");
-		else
-			return repo.findByNombreOrDniOrIdCiudad(filter.getNombre(), filter.getDni(), filter.getIdCiudadSeleccionada());
+		else {
+			List<Persona> personas = repo.findByNombreOrDniOrIdCiudad(filter.getNombre(), filter.getDni(), filter.getIdCiudadSeleccionada());
+			if (personas.isEmpty()) {
+	            throw new Excepcion("No se encontraron resultados para los datos ingresados");
+	        }
+
+	        return personas;
+		}
 	}
 
 	@Override
